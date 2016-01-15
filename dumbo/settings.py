@@ -32,6 +32,7 @@ STATICFILES_DIRS = (
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
+print(DEBUG)
 
 if DEBUG:
     WEBPACK_LOADER = {
