@@ -18,6 +18,8 @@ DATABASE_URL="postgres://dev_dumbo_user:dev@localhost/dev_dumbo_db"
 export DATABASE_URL
 `
 
+heroku: https://thawing-earth-1925.herokuapp.com/
+
 	
 
 
