@@ -1,5 +1,10 @@
 # dumbo
 
+```
+pip3 install -r requirements.txt
+npm install
+```
+
 Make sure you have postgres installed and then:
  
 ```
