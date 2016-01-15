@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+import dj_database_url
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config()
+
+# Enable Persistent Connections
+DATABASES['default']['CONN_MAX_AGE'] = 500
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -66,6 +73,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'apiapp',
     'webpack_loader'
 ]
@@ -101,17 +109,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dumbo.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ),
+    'NON_FIELD_ERRORS_KEY': 'error',
+    'EXCEPTION_HANDLER': 'apiapp.utils.custom_exception_handler'
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
