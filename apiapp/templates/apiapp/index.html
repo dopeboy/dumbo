@@ -1,0 +1,16 @@
+{% load render_bundle from webpack_loader %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+	{% load static from staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
+  </head>
+  <body>
+    <div id="react-app"></div>
+	<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+	<script src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+    {% render_bundle 'main' %}
+  </body>
+</html>
