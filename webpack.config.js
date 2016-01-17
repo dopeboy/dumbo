@@ -28,7 +28,7 @@ module.exports = {
       { test: /\.js(x?)$/,  exclude: /node_modules/,loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']},
 	  { test: /\.css$/, loader: "style!css" },
 	  { test: /\.less$/, loader: "style!css!less"},
-	  {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+	  { test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192'}
     ],
   },
   node: {

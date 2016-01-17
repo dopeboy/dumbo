@@ -8,7 +8,7 @@ npm install
 Make sure you have postgres installed and then:
  
 ```
-sudo -u postgres createdb -O dev_dumbo_user dev_dumbo_db
+sudo -u postgres createuser -P dev_dumbo_user
 sudo -u postgres createdb -O dev_dumbo_user dev_dumbo_db
 ```
 
