@@ -29,7 +29,6 @@ export default class Exam extends React.Component {
     }
 
     processTags(tags) {
-        console.log(tags);
 		return (
 			tags.map(function(s, i) {
                 var classContent = "ui " + s.color + " horizontal label";

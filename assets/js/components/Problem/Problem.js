@@ -10,16 +10,43 @@ export default class Problem extends React.Component {
         super();
 
         this.state = {
-            problem: null
+            problem: null,
+            processed_tags: null,
+            processed_hierarchy: null,
         };
     }
     
     componentDidMount() {
 		$.get("/problems/" + this.props.params.problem_id, function(result) {
+            console.log(result);
 			this.setState({
-                problem: result
+                problem: result,
+                processed_tags: this.processTags(JSON.parse(result.tags)),
+                processed_hierarchy: this.processHierarchy(JSON.parse(result.hierarchy))
 			});
 		}.bind(this));
+    }
+
+    processTags(tags) {
+		return (
+			tags.map(function(s, i) {
+                var classContent = "ui " + s.color + " mini label";
+				  return [
+                        <div className={classContent}>{s.content}</div>
+				  ]
+			}))
+    }
+
+    processHierarchy(categories) {
+		return (
+			categories.map(function(s, i) {
+				  return [
+                <span>
+                        <span className="section">{s}</span>
+                        {i==categories.length-1 ? "" : <i className="right chevron icon divider"></i>}
+                </span>
+				  ]
+			}))
     }
 
     render() {
@@ -50,18 +77,13 @@ export default class Problem extends React.Component {
                             <div className="eight wide column">
                                 <h4>Type</h4>
                                 <div className="ui small breadcrumb">
-                                    <span className="section">Geometry</span>
-                                    <i className="right chevron icon divider"></i>
-                                    <span className="section">Coordinate geometry</span>
-                                    <i className="right chevron icon divider"></i>
-                                    <div className="section">Circles</div>
+                                    {this.state.processed_hierarchy}
                                 </div>
                             </div>
                             <div className="eight wide column">
                                 <h4>Tags</h4>
                                 <div id="tags">
-                                    <a className="ui red mini label">circle</a>
-                                    <a className="ui teal mini label">pythagorean</a>
+                                    {this.state.processed_tags}
                                 </div>
                             </div>
                         </div>
