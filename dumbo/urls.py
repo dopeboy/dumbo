@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.NoDataView.as_view()),
-    url(r'^idsf', views.NoDataView.as_view())
+    url(r'^exam', views.NoDataView.as_view()),
+    url(r'^problem', views.NoDataView.as_view())
 ]
