@@ -23,9 +23,12 @@ class Problem(models.Model):
     class Meta:
         unique_together = ('order', 'exam')
 
+    def __str__(self):
+        return str(self.exam) + " - Problem " + str(self.order)
+
 
 class Step(models.Model):
-    problem = models.ForeignKey(Problem)
+    problem = models.ForeignKey(Problem, related_name='steps')
     order = models.IntegerField()
 
     # These will store HTML
@@ -34,3 +37,6 @@ class Step(models.Model):
 
     class Meta:
         unique_together = ('order', 'problem')
+
+    def __str__(self):
+        return str(self.problem) + " - Step " + str(self.order)

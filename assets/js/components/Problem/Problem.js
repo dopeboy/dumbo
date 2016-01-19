@@ -13,18 +13,63 @@ export default class Problem extends React.Component {
             problem: null,
             processed_tags: null,
             processed_hierarchy: null,
+            processed_steps: null
         };
     }
     
     componentDidMount() {
 		$.get("/problems/" + this.props.params.problem_id, function(result) {
-            console.log(result);
 			this.setState({
                 problem: result,
                 processed_tags: this.processTags(JSON.parse(result.tags)),
-                processed_hierarchy: this.processHierarchy(JSON.parse(result.hierarchy))
+                processed_hierarchy: this.processHierarchy(JSON.parse(result.hierarchy)),
+                processed_steps: this.processSteps(result.steps)
 			});
 		}.bind(this));
+    }
+
+    handleBackClickHandler(e) {
+        e.preventDefault();
+
+        var visible = $('.step').not(".hidden");
+
+        visible.transition({
+            animation : 'fade left',
+            duration  : 600,
+            onComplete : function() {
+                visible.prev('.step').transition({
+                    animation : 'fade right',
+                duration  : 600,
+                });
+                if (visible.prev('.step').prev('.step').length == 0) {
+                    $('button.red').addClass("disabled");
+                }
+            }
+        });
+
+        $(ReactDOM.findDOMNode(this.refs.forwardButton)).removeClass("disabled");
+    }
+
+    handleForwardClickHandler(e) {
+        e.preventDefault();
+
+		var visible = $('.step').not(".hidden");
+
+		visible.transition({
+			animation : 'fade right',
+			duration  : 600,
+			onComplete : function() {
+				visible.next('.step').transition({
+					animation : 'fade left',
+					duration  : 600,
+				});
+				if (visible.next('.step').next('.step').length == 0) {
+					$('button.green').addClass("disabled");
+				}
+			}
+		});
+
+        $(ReactDOM.findDOMNode(this.refs.backButton)).removeClass("disabled");
     }
 
     processTags(tags) {
@@ -47,6 +92,49 @@ export default class Problem extends React.Component {
                 </span>
 				  ]
 			}))
+    }
+
+    showAnswerClickHandler(e) {
+        e.preventDefault();
+
+        // We shouldn't be selecting by class here. 
+        var visible = $('.step').not(".hidden").find('.answer-text');
+
+        visible.transition({
+            animation : 'fade down',
+            duration  : 600,
+            onComplete : function() {
+            }
+        });
+    }
+
+    processSteps(steps) {
+		return (
+			steps.map(function(s, i) {
+                  var stepClasses = "step ui relaxed grid" + (i==0 ? "" : " hidden transition");
+				  return [
+
+                        <div id={i} className={stepClasses}>
+                            <div className="row question">
+                                <div className="fifteen wide column">
+                                     <img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
+                                      <div dangerouslySetInnerHTML={{__html: s.question}}></div>
+                                </div>
+                                <div className="one wide column">
+                                    <button className="show-answer-btn ui icon button" onClick={this.showAnswerClickHandler.bind(this)} >
+                                      <i className="angle big double down icon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="row hidden transition answer-text">
+                                <div className="fifteen wide column">
+                                    <img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
+                                    <span dangerouslySetInnerHTML={{__html: s.answer}}></span>
+                                </div>
+                            </div>
+                        </div>
+				  ]
+			}.bind(this)))
     }
 
     render() {
@@ -72,7 +160,7 @@ export default class Problem extends React.Component {
                           <div className="active section">Problem {this.state.problem == null ? "" : this.state.problem.order}</div>
                         </div>
                     </div>
-                    <div id="solution" className="ui text container">
+                    <div className="ui text container">
                         <div id="metadata" className="ui grid">
                             <div className="eight wide column">
                                 <h4>Type</h4>
@@ -89,8 +177,7 @@ export default class Problem extends React.Component {
                         </div>
                     </div>
                     <div className="ui divider"></div>
-                    <br/>
-                    <div id="question" className="ui relaxed grid">
+                    <div id="question-choices" className="ui relaxed grid">
                         <div className="eight wide column">
                             <h2>Question</h2>
                             <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.problem_img_url}/>
@@ -103,6 +190,23 @@ export default class Problem extends React.Component {
                     <div className="ui relaxed grid">
                         <div className="column">
                             <h2>Help</h2>
+                        </div>
+                    </div>
+                    {this.state.processed_steps}
+                    <br/>
+                    <br/>
+                    <div id="controls" className="ui center aligned grid">
+                        <div className="column">
+                            <div className="ui buttons">
+                                <button className="ui disabled control labeled red icon button" ref="backButton" onClick={this.handleBackClickHandler.bind(this)}>
+                                    <i className="left chevron icon"></i>
+                                    Back
+                                </button>
+                                <button className="ui control right labeled green icon button" ref="forwardButton" onClick={this.handleForwardClickHandler.bind(this)}>
+                                    Forward
+                                    <i className="right chevron icon"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
