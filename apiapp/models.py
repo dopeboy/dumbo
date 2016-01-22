@@ -37,6 +37,7 @@ class Step(models.Model):
 
     class Meta:
         unique_together = ('order', 'problem')
+        ordering = ['order']
 
     def __str__(self):
         return str(self.problem) + " - Step " + str(self.order)
