@@ -29,6 +29,16 @@ export DATABASE_URL
 
 heroku: https://thawing-earth-1925.herokuapp.com/
 
-	
+## Guidelines for writing solutions (work in progress)
+
+Emphasis on understanding key phrases of the question. [parsing]
+
+"Ramping up gradually" - giving as little mechanical help in the beginning steps of the solution. Spectrum goes conceptual -> mechanical.
+
+Explicitly calling out misdirection in the question. 
+
+Being as detailed and pedantic as possible.
+
+Assuming a baseline understanding of arithmetic and terms like "systems of equations, inequalities, etc". 
 
 
