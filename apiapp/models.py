@@ -19,9 +19,11 @@ class Problem(models.Model):
     # These will store JSON
     tags = models.TextField(blank=True, null=True)
     hierarchy = models.TextField(blank=True, null=True)
+    display_text = models.TextField(blank=True, null=True)
 
     class Meta:
         unique_together = ('order', 'exam')
+        ordering = ['display_text']
 
     def __str__(self):
         return str(self.exam) + " - Problem " + str(self.order)

@@ -43,7 +43,7 @@ export default class Exam extends React.Component {
 			problems.map(function(s, i) {
 				  return [
                     <Link className="item" to={`/problem/${s.id}`}>
-                        Question {s.order}
+						{s.display_text}
                         {this.processTags(JSON.parse(s.tags))}
                       </Link>
 				  ]
