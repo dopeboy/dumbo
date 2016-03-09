@@ -23,7 +23,7 @@ class Problem(models.Model):
 
     class Meta:
         unique_together = ('order', 'exam')
-        ordering = ['display_text']
+        ordering = ['order']
 
     def __str__(self):
         return str(self.exam) + " - Problem " + str(self.order)
