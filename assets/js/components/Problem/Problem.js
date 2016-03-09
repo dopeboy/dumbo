@@ -16,7 +16,7 @@ export default class Problem extends React.Component {
             processed_steps: null
         };
     }
-    
+
     componentDidMount() {
 		$.get("/problems/" + this.props.params.problem_id, function(result) {
 			this.setState({
@@ -97,7 +97,7 @@ export default class Problem extends React.Component {
     showAnswerClickHandler(e) {
         e.preventDefault();
 
-        // We shouldn't be selecting by class here. 
+        // We shouldn't be selecting by class here.
         var visible = $('.step').not(".hidden").find('.answer-text');
 
         visible.transition({
@@ -140,6 +140,31 @@ export default class Problem extends React.Component {
     render() {
 		var formClasses = "ui form" + (this.state.problem !== null ? "" : " loading");
 
+        var question_choices;
+        if (this.state.problem && this.state.problem.choices_img_url) {
+            question_choices = (
+                <div id="question-choices" className="ui relaxed grid">
+                    <div className="eight wide column">
+                        <h2>Question</h2>
+                        <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.problem_img_url}/>
+                    </div>
+                    <div className="eight wide column">
+                        <h2>Choices</h2>
+                        <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.choices_img_url}/>
+                    </div>
+                </div>
+            );
+        } else {
+            question_choices = (
+                <div id="question-choices" className="ui relaxed grid">
+                    <div className="sixteen wide column">
+                        <h2>Question</h2>
+                        <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.problem_img_url}/>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div id="problem-component">
                 <div className="ui text container">
@@ -177,16 +202,7 @@ export default class Problem extends React.Component {
                         </div>
                     </div>
                     <div className="ui divider"></div>
-                    <div id="question-choices" className="ui relaxed grid">
-                        <div className="eight wide column">
-                            <h2>Question</h2>
-                            <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.problem_img_url}/>
-                        </div>
-                        <div className="eight wide column">
-                            <h2>Choices</h2>
-                            <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.choices_img_url}/>
-                        </div>
-                    </div>
+                    {question_choices}
                     <div className="ui relaxed grid">
                         <div className="column">
                             <h2>Help</h2>
