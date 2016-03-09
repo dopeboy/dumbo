@@ -21,7 +21,8 @@ class ProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Problem
         fields = ('id', 'exam', 'order', 'problem_img_url',
-                  'choices_img_url', 'tags', 'hierarchy', 'steps')
+                  'choices_img_url', 'tags', 'hierarchy', 'steps',
+                  'display_text')
 
 
 class FullExamSerializer(serializers.ModelSerializer):
