@@ -142,6 +142,9 @@ export default class Problem extends React.Component {
 
         return (
             <div id="problem-component">
+				<Helmet
+					title="dumbo - Problem"
+				/>
                 <div className="ui text container">
                     <div id="header-img" className="ui center aligned grid">
                         <Link to="/">

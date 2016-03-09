@@ -35,6 +35,9 @@ export default class Home extends React.Component {
 
         return (
             <div id="home-component">
+				<Helmet
+					title="dumbo"
+				/>
                 <div className="ui center aligned grid">
                     <img src={require("../../../images/dumbo.gif")} className="ui image" />
                 </div>

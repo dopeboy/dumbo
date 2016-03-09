@@ -70,6 +70,9 @@ export default class Exam extends React.Component {
 
         return (
             <div id="exam-component">
+				<Helmet
+					title="dumbo - Exams"
+				/>
                 <div className="ui text container">
                     <div id="header-img" className="ui center aligned grid">
                         <Link to="/">
