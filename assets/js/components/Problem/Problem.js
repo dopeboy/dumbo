@@ -13,7 +13,8 @@ export default class Problem extends React.Component {
             problem: null,
             processed_tags: null,
             processed_hierarchy: null,
-            processed_steps: null
+            processed_steps: null,
+            step: 1
         };
     }
 
@@ -48,6 +49,7 @@ export default class Problem extends React.Component {
         });
 
         $(ReactDOM.findDOMNode(this.refs.forwardButton)).removeClass("disabled");
+        this.setState({ step: Math.max(this.state.step - 1, 1) });
     }
 
     handleForwardClickHandler(e) {
@@ -70,6 +72,7 @@ export default class Problem extends React.Component {
 		});
 
         $(ReactDOM.findDOMNode(this.refs.backButton)).removeClass("disabled");
+        this.setState({ step: Math.min(this.state.step + 1, this.state.problem.steps.length) });
     }
 
     processTags(tags) {
@@ -138,6 +141,13 @@ export default class Problem extends React.Component {
     }
 
     render() {
+        if (this.state.problem != undefined) {
+            var exam = this.state.problem.exam.id;
+            var problem = this.state.problem.id;
+            var step = this.state.step;
+            ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, 'viewed step', step)
+            console.log({ exam: exam, problem: problem, step: step });
+        }
 		var formClasses = "ui form" + (this.state.problem !== null ? "" : " loading");
 
         var question_choices;
