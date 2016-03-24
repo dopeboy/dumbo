@@ -143,11 +143,12 @@ export default class Problem extends React.Component {
     render() {
         if (this.state.problem != undefined) {
             var exam = this.state.problem.exam.id;
-            var problem = this.state.problem.id;
+            var problem = this.state.problem.order;
             var step = this.state.step;
             ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, 'viewed step', step)
             console.log({ exam: exam, problem: problem, step: step });
         }
+
 		var formClasses = "ui form" + (this.state.problem !== null ? "" : " loading");
 
         var question_choices;
