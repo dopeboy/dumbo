@@ -145,7 +145,7 @@ export default class Problem extends React.Component {
             var exam = this.state.problem.exam.id;
             var problem = this.state.problem.order;
             var completion = this.state.step/this.state.problem.steps.length;
-            ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, completion)
+            ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, "completion", completion)
             console.log({ exam: exam, problem: problem, completion: completion });
         }
 
