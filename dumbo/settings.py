@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'apiapp',
+    'django_extensions',
     'webpack_loader'
 ]
 
