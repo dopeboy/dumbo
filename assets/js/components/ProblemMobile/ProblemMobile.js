@@ -120,14 +120,14 @@ export default class ProblemMobile extends React.Component {
                         <div id={i} className={stepClasses}>
                             <div className="row question">
                                 <div className="sixteen wide column">
-                                     <img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
-                                      <div dangerouslySetInnerHTML={{__html: s.question}}></div>
+                                     <img src={require("../../../images/patrick.png")} className="bot left floated small ui circular image"/>
+                                      <div className="qa" dangerouslySetInnerHTML={{__html: s.question}}></div>
                                 </div>
                             </div>
                             <div className="row transition answer-text">
                                 <div className="fifteen wide column">
-                                    <img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
-                                    <span dangerouslySetInnerHTML={{__html: s.answer}}></span>
+                                    <img src={require("../../../images/patrick.png")} className="bot left floated small ui circular image"/>
+                                    <span className="qa" dangerouslySetInnerHTML={{__html: s.answer}}></span>
                                 </div>
                             </div>
                         </div>

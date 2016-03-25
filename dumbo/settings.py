@@ -23,6 +23,7 @@ DATABASES['default']['CONN_MAX_AGE'] = 500
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEFAULT_INDEX_PATH = 'apiapp/index.html'
+DEFAULT_MOBILE_PATH = 'apiapp/mobile.html'
 
 # We do this so that django's collectstatic copies or our bundles
 # to the STATIC_ROOT or syncs them to whatever storage we use.

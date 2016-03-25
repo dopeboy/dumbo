@@ -3,6 +3,7 @@ import Helmet from "react-helmet";
 import '!style!css!less!./Exam.less';
 import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
+var MobileDetect = require('mobile-detect')
 
 export default class Exam extends React.Component {
 
@@ -39,10 +40,13 @@ export default class Exam extends React.Component {
     }
 
     processProblemsAsText(problems) {
+		var md = new MobileDetect(window.navigator.userAgent);
+
 		return (
 			problems.map(function(s, i) {
+				var link = md.mobile() == null ? "/problem_desktop/" : "/problem/";
 				  return [
-                    <Link className="item" to={`/problem/${s.id}`}>
+                    <Link className="item" to={link + s.id}>
 						{s.display_text}&nbsp;
                         {this.processTags(JSON.parse(s.tags))}
                       </Link>

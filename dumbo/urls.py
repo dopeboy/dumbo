@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.NoDataView.as_view()),
     url(r'^exam', views.NoDataView.as_view()),
-    url(r'^problem', views.NoDataView.as_view())
+    url(r'^problem_desktop', views.NoDataView.as_view()),
+    url(r'^problem', views.MobileView.as_view())
 ]

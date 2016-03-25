@@ -22,7 +22,7 @@ export default class PaddedContainer extends React.Component {
 export default class FullSizeContainer extends React.Component {
     render() {
         return (
-            <div id="fullsize-container" className="ui grid container">
+            <div id="fullsize-container" className="">
                 {this.props.children}
             </div>
         )

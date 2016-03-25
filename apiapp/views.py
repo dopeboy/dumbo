@@ -9,6 +9,10 @@ class NoDataView(TemplateView):
     template_name = settings.DEFAULT_INDEX_PATH
 
 
+class MobileView(TemplateView):
+    template_name = settings.DEFAULT_MOBILE_PATH
+
+
 class ExamViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Exam.objects.all()
 
