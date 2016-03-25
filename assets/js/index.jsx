@@ -29,6 +29,16 @@ export default class FullSizeContainer extends React.Component {
     }
 }
 
+export default class Naked extends React.Component {
+    render() {
+        return (
+            <div id="" className="ui grid">
+                {this.props.children}
+            </div>
+        )
+    }
+}
+
 render((
     <Router history={browserHistory}>
         <Route path="/" component={PaddedContainer}>
@@ -37,6 +47,8 @@ render((
         </Route>
         <Route path="/" component={FullSizeContainer}>
             <Route path="exam/:exam_id" component={Exam}></Route>
+        </Route>
+        <Route path="/" component={Naked}>
             <Route path="problem/:problem_id" component={ProblemMobile}></Route>
         </Route>
     </Router>

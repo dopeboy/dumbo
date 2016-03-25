@@ -119,14 +119,9 @@ export default class ProblemMobile extends React.Component {
 
                         <div id={i} className={stepClasses}>
                             <div className="row question">
-                                <div className="fifteen wide column">
+                                <div className="sixteen wide column">
                                      <img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
                                       <div dangerouslySetInnerHTML={{__html: s.question}}></div>
-                                </div>
-                                <div className="one wide column">
-                                    <button className="show-answer-btn ui icon button" onClick={this.showAnswerClickHandler.bind(this)} >
-                                      <i className="angle big double down icon"></i>
-                                    </button>
                                 </div>
                             </div>
                             <div className="row transition answer-text">
