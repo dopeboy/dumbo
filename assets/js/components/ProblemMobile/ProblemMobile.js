@@ -173,6 +173,7 @@ export default class ProblemMobile extends React.Component {
 
         return (
             <div id="problem-component">
+
 				<Helmet
 					title="dumbo - Problem"
 				/>
