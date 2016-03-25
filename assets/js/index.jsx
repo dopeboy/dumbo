@@ -7,6 +7,7 @@ import '!style!css!less!./index.less';
 import Home from './components/Home/Home';
 import Exam from './components/Exam/Exam';
 import Problem from './components/Problem/Problem';
+import ProblemMobile from './components/ProblemMobile/ProblemMobile';
 
 export default class PaddedContainer extends React.Component {
     render() {
@@ -21,7 +22,7 @@ export default class PaddedContainer extends React.Component {
 export default class FullSizeContainer extends React.Component {
     render() {
         return (
-            <div id="fullsize-container">
+            <div id="fullsize-container" className="ui grid container">
                 {this.props.children}
             </div>
         )
@@ -32,10 +33,11 @@ render((
     <Router history={browserHistory}>
         <Route path="/" component={PaddedContainer}>
             <IndexRoute component={Home} />
-            <Route path="problem/:problem_id" component={Problem}></Route>
+            <Route path="problem_desktop/:problem_id" component={Problem}></Route>
         </Route>
         <Route path="/" component={FullSizeContainer}>
             <Route path="exam/:exam_id" component={Exam}></Route>
+            <Route path="problem/:problem_id" component={ProblemMobile}></Route>
         </Route>
     </Router>
 ), document.getElementById('react-app'))
