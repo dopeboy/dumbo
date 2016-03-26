@@ -114,40 +114,32 @@ export default class Problem extends React.Component {
     processSteps(steps) {
 		return (
 			steps.map(function(s, i) {
-                  var stepClasses = "step ui relaxed grid" + (i==0 ? "" : " hidden transition");
+                  var stepClasses = "ui step two column grid" + (i==0 ? "" : " hidden transition");
 				  return [
 
                         <div id={i} className={stepClasses}>
-                            <div className="row question">
-                                <div className="fifteen wide column">
-									<div className="row">
-										<div className="one wide column">
-											<img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
-										</div>
-										<div className="fifteen wide column">
-											<div dangerouslySetInnerHTML={{__html: s.question}}></div>
-										</div>
+							<div className="fifteen wide column">
+								<div className="ui two column grid">
+									<div className="two wide column">
+										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
 									</div>
-                                </div>
-                                <div className="one wide column">
-                                    <button className="show-answer-btn ui icon button" onClick={this.showAnswerClickHandler.bind(this)} >
-                                      <i className="angle big double down icon"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="row hidden transition answer-text">
-                                <div className="fifteen wide column">
-									<div className="row">
-										<div className="one wide column">
-											<img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
-										</div>
-										<div className="fifteen wide column">
-											<div dangerouslySetInnerHTML={{__html: s.answer}}></div>
-										</div>
+									<div className="fourteen wide column">
+										<div dangerouslySetInnerHTML={{__html: s.question}}></div>
 									</div>
-                                </div>
-                            </div>
-                        </div>
+									<div className="answer-text hidden transition two wide column">
+										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
+									</div>
+									<div className="answer-text hidden transition fourteen wide column">
+										<div dangerouslySetInnerHTML={{__html: s.answer}}></div>
+									</div>
+								</div>
+							</div>
+							<div className="one wide column">
+								<button className="show-answer-btn ui icon button" onClick={this.showAnswerClickHandler.bind(this)} >
+									<i className="angle big double down icon"></i>
+								</button>
+							</div>
+						</div>
 				  ]
 			}.bind(this)))
     }
