@@ -114,7 +114,7 @@ export default class ProblemMobile extends React.Component {
     processSteps(steps) {
 		return (
 			steps.map(function(s, i) {
-                  var stepClasses = "ui step two column grid" + (i==0 ? "" : " ");
+                  var stepClasses = "ui step two column grid" + (i==0 ? "" : " uutransition");
 				  return [
 
                         <div id={i} className={stepClasses}>
@@ -124,13 +124,13 @@ export default class ProblemMobile extends React.Component {
 										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
 									</div>
 									<div className="fourteen wide column">
-										<div dangerouslySetInnerHTML={{__html: s.question}}></div>
+										<div className="qa" dangerouslySetInnerHTML={{__html: s.question}}></div>
 									</div>
 									<div className="answer-text two wide column">
 										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
 									</div>
 									<div className="answer-text fourteen wide column">
-										<div dangerouslySetInnerHTML={{__html: s.answer}}></div>
+										<div className="qa" dangerouslySetInnerHTML={{__html: s.answer}}></div>
 									</div>
 								</div>
 							</div>
