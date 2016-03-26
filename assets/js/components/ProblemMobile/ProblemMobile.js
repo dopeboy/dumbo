@@ -114,23 +114,27 @@ export default class ProblemMobile extends React.Component {
     processSteps(steps) {
 		return (
 			steps.map(function(s, i) {
-                  var stepClasses = "step ui grid" + (i==0 ? "" : " transition");
+                  var stepClasses = "ui step two column grid" + (i==0 ? "" : " hidden transition");
 				  return [
 
                         <div id={i} className={stepClasses}>
-                            <div className="row question">
-                                <div className="sixteen wide column">
-                                     <img src={require("../../../images/patrick.png")} className="bot left floated small ui circular image"/>
-                                      <div className="qa" dangerouslySetInnerHTML={{__html: s.question}}></div>
-                                </div>
-                            </div>
-                            <div className="row transition answer-text">
-                                <div className="fifteen wide column">
-                                    <img src={require("../../../images/patrick.png")} className="bot left floated small ui circular image"/>
-                                    <span className="qa" dangerouslySetInnerHTML={{__html: s.answer}}></span>
-                                </div>
-                            </div>
-                        </div>
+							<div className="sixteen wide column">
+								<div className="ui two column grid">
+									<div className="two wide column">
+										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
+									</div>
+									<div className="fourteen wide column">
+										<div dangerouslySetInnerHTML={{__html: s.question}}></div>
+									</div>
+									<div className="answer-text two wide column">
+										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
+									</div>
+									<div className="answer-text fourteen wide column">
+										<div dangerouslySetInnerHTML={{__html: s.answer}}></div>
+									</div>
+								</div>
+							</div>
+						</div>
 				  ]
 			}.bind(this)))
     }
