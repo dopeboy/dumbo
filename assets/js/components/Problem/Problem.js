@@ -120,8 +120,14 @@ export default class Problem extends React.Component {
                         <div id={i} className={stepClasses}>
                             <div className="row question">
                                 <div className="fifteen wide column">
-                                     <img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
-                                      <div dangerouslySetInnerHTML={{__html: s.question}}></div>
+									<div className="row">
+										<div className="one wide column">
+											<img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
+										</div>
+										<div className="fifteen wide column">
+											<div dangerouslySetInnerHTML={{__html: s.question}}></div>
+										</div>
+									</div>
                                 </div>
                                 <div className="one wide column">
                                     <button className="show-answer-btn ui icon button" onClick={this.showAnswerClickHandler.bind(this)} >
