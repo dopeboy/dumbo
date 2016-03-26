@@ -114,7 +114,7 @@ export default class ProblemMobile extends React.Component {
     processSteps(steps) {
 		return (
 			steps.map(function(s, i) {
-                  var stepClasses = "ui step two column grid" + (i==0 ? "" : " hidden transition");
+                  var stepClasses = "ui step two column grid" + (i==0 ? "" : " ");
 				  return [
 
                         <div id={i} className={stepClasses}>
