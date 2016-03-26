@@ -3,6 +3,7 @@ import Helmet from "react-helmet";
 import '!style!css!less!./ProblemMobile.less';
 import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
+import SwipeableViews from 'react-swipeable-views';
 
 export default class ProblemMobile extends React.Component {
 
@@ -114,9 +115,8 @@ export default class ProblemMobile extends React.Component {
     processSteps(steps) {
 		return (
 			steps.map(function(s, i) {
-                  var stepClasses = "ui step two column grid" + (i==0 ? "" : " uutransition");
+                  var stepClasses = "ui step two column grid" + (i==0 ? "" : " ");
 				  return [
-
                         <div id={i} className={stepClasses}>
 							<div className="sixteen wide column">
 								<div className="ui two column grid">
@@ -174,6 +174,22 @@ export default class ProblemMobile extends React.Component {
                 </div>
             );
         }
+var styles = {
+  slide: {
+    padding: 15,
+    minHeight: 100,
+    color: '#fff',
+  },
+  slide1: {
+    background: '#FEA900',
+  },
+  slide2: {
+    background: '#B3DC4A',
+  },
+  slide3: {
+    background: '#6AC0FF',
+  },
+};
 
         return (
             <div id="problem-component">
@@ -181,8 +197,11 @@ export default class ProblemMobile extends React.Component {
 				<Helmet
 					title="dumbo - Problem"
 				/>
-                <br/>
+                <br/><br/>
+  <SwipeableViews>
                 {this.state.processed_steps}
+  </SwipeableViews>
+                <br/>
             </div>
         );
     }
