@@ -32,7 +32,7 @@ export default class FullSizeContainer extends React.Component {
 export default class Naked extends React.Component {
     render() {
         return (
-            <div id="" className="ui grid">
+            <div id="" className="ui grid" style={{height:"100%"}}>
                 {this.props.children}
             </div>
         )

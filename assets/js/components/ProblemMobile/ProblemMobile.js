@@ -198,9 +198,9 @@ var styles = {
 					title="dumbo - Problem"
 				/>
                 <br/><br/>
-  <SwipeableViews>
-                {this.state.processed_steps}
-  </SwipeableViews>
+                  <SwipeableViews containerStyle={{height: "1900px"}} slideStyle={{height: "100%"}} style={{height: "100%"}}>
+                        {this.state.processed_steps}
+                  </SwipeableViews>
                 <br/>
             </div>
         );
