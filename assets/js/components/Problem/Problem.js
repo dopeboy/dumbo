@@ -137,8 +137,14 @@ export default class Problem extends React.Component {
                             </div>
                             <div className="row hidden transition answer-text">
                                 <div className="fifteen wide column">
-                                    <img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
-                                    <span dangerouslySetInnerHTML={{__html: s.answer}}></span>
+									<div className="row">
+										<div className="one wide column">
+											<img src={require("../../../images/patrick.png")} className="bot left floated mini ui circular image"/>
+										</div>
+										<div className="fifteen wide column">
+											<div dangerouslySetInnerHTML={{__html: s.answer}}></div>
+										</div>
+									</div>
                                 </div>
                             </div>
                         </div>
