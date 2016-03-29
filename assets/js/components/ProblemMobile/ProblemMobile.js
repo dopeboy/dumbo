@@ -98,11 +98,12 @@ export default class ProblemMobile extends React.Component {
 			}))
     }
 
-    showAnswerClickHandler(e) {
+    showAnswerClickHandler(i, e) {
         e.preventDefault();
 
         // We shouldn't be selecting by class here.
-        var visible = $('.step').not(".hidden").find('.answer-text');
+        var visible = $('.step#' + i).not(".hidden").find('.answer-text');
+        $('.step#' + i).find('button').hide();
 
         visible.transition({
             animation : 'fade down',
@@ -126,10 +127,13 @@ export default class ProblemMobile extends React.Component {
 									<div className="fourteen wide column">
 										<div className="qa" dangerouslySetInnerHTML={{__html: s.question}}></div>
 									</div>
-									<div className="answer-text two wide column">
+                                    <div className="ui center aligned segment" style={{width: "100%", border: "0px", boxShadow: "none", marginTop: "0px"}}>
+                                        <button onClick={this.showAnswerClickHandler.bind(this, i)} className="positive massive ui button">Show</button>
+                                    </div>
+									<div className="answer-text two wide column hidden transition">
 										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
 									</div>
-									<div className="answer-text fourteen wide column">
+									<div className="answer-text fourteen wide column hidden transition">
 										<div className="qa" dangerouslySetInnerHTML={{__html: s.answer}}></div>
 									</div>
 								</div>
@@ -140,67 +144,32 @@ export default class ProblemMobile extends React.Component {
     }
 
     render() {
+        var current_step = null;
+        var num_steps = null;
+
         if (this.state.problem != undefined) {
             var exam = this.state.problem.exam.id;
             var problem = this.state.problem.order;
             var completion = this.state.step/this.state.problem.steps.length;
             ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, "completion", completion)
             console.log({ exam: exam, problem: problem, completion: completion });
+
+            current_step = this.state.step;
+            num_steps = this.state.problem.steps.length;
         }
 
 		var formClasses = "ui form" + (this.state.problem !== null ? "" : " loading");
 
-        var question_choices;
-        if (this.state.problem && this.state.problem.choices_img_url) {
-            question_choices = (
-                <div id="question-choices" className="ui relaxed grid">
-                    <div className="eight wide column">
-                        <h2>Question</h2>
-                        <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.problem_img_url}/>
-                    </div>
-                    <div className="eight wide column">
-                        <h2>Choices</h2>
-                        <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.choices_img_url}/>
-                    </div>
-                </div>
-            );
-        } else {
-            question_choices = (
-                <div id="question-choices" className="ui relaxed grid">
-                    <div className="sixteen wide column">
-                        <h2>Question</h2>
-                        <img className="ui image" src={this.state.problem == null ? "" : this.state.problem.problem_img_url}/>
-                    </div>
-                </div>
-            );
-        }
-var styles = {
-  slide: {
-    padding: 15,
-    minHeight: 100,
-    color: '#fff',
-  },
-  slide1: {
-    background: '#FEA900',
-  },
-  slide2: {
-    background: '#B3DC4A',
-  },
-  slide3: {
-    background: '#6AC0FF',
-  },
-};
-
         return (
             <div id="problem-component">
-
 				<Helmet
 					title="dumbo - Problem"
 				/>
-                <br/><br/>
-                  <SwipeableViews containerStyle={{height: window.innerHeight}} slideStyle={{height: "100%"}} style={{height: "100%"}}>
-                        {this.state.processed_steps}
-                  </SwipeableViews>
+                <h1 className="ui centered align header">Step {current_step}/{num_steps}</h1>
+                <br/>
+                <SwipeableViews containerStyle={{height: window.innerHeight}} slideStyle={{height: "100%"}} style={{height: "100%"}}>
+                    {this.state.processed_steps}
+                </SwipeableViews>
                 <br/>
             </div>
         );
