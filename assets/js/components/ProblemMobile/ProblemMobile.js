@@ -127,6 +127,9 @@ export default class ProblemMobile extends React.Component {
 									<div className="fourteen wide column">
 										<div className="qa" dangerouslySetInnerHTML={{__html: s.question}}></div>
 									</div>
+                                    <div className="ui center aligned segment" style={{width: "100%", border: "0px", boxShadow: "none", marginTop: "0px"}}>
+                                        <button onClick={this.showAnswerClickHandler.bind(this, i)} className="positive massive ui button">Show</button>
+                                    </div>
 									<div className="answer-text two wide column hidden transition">
 										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
 									</div>
