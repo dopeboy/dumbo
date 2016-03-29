@@ -143,6 +143,17 @@ export default class ProblemMobile extends React.Component {
 			}.bind(this)))
     }
 
+    onChangeIndex(newIndex, oldIndex) {
+        var step = newIndex + 1;
+        if (this.state.problem != undefined) {
+            var exam = this.state.problem.exam.id;
+            var problem = this.state.problem.order;
+            var completion = step/this.state.problem.steps.length;
+
+            ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, "completion", completion)
+        }
+    }
+
     render() {
         var current_step = null;
         var num_steps = null;
@@ -167,7 +178,11 @@ export default class ProblemMobile extends React.Component {
 				/>
                 <h1 className="ui centered align header">Step {current_step}/{num_steps}</h1>
                 <br/>
-                <SwipeableViews containerStyle={{height: window.innerHeight}} slideStyle={{height: "100%"}} style={{height: "100%"}}>
+                <SwipeableViews
+                    containerStyle={{height: window.innerHeight}}
+                    slideStyle={{height: "100%"}}
+                    style={{height: "100%"}}
+                    onChangeIndex={this.onChangeIndex.bind(this)}>
                     {this.state.processed_steps}
                 </SwipeableViews>
                 <br/>
