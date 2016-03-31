@@ -117,6 +117,12 @@ export default class ProblemMobile extends React.Component {
 		return (
 			steps.map(function(s, i) {
                   var stepClasses = "ui step two column grid" + (i==0 ? "" : " ");
+                  var swipeNextDiv = "";
+
+                  if (i != steps.length-1) {
+                      swipeNextDiv = <div className="qa swipe-next">Swipe left to go to the next step</div>;
+                  }
+
 				  return [
                         <div id={i} className={stepClasses}>
 							<div className="sixteen wide column">
@@ -135,6 +141,7 @@ export default class ProblemMobile extends React.Component {
 									</div>
 									<div className="answer-text fourteen wide column hidden transition">
 										<div className="qa" dangerouslySetInnerHTML={{__html: s.answer}}></div>
+                                        {swipeNextDiv}
 									</div>
 								</div>
 							</div>
