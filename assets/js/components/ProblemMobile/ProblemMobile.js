@@ -15,7 +15,7 @@ export default class ProblemMobile extends React.Component {
             processed_tags: null,
             processed_hierarchy: null,
             processed_steps: null,
-            step: 1
+            step: 1,
         };
     }
 
@@ -152,10 +152,11 @@ export default class ProblemMobile extends React.Component {
 
             ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, "completion", completion)
         }
+
+        this.setState({step: step});
     }
 
     render() {
-        var current_step = null;
         var num_steps = null;
 
         if (this.state.problem != undefined) {
@@ -165,7 +166,6 @@ export default class ProblemMobile extends React.Component {
             ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, "completion", completion)
             console.log({ exam: exam, problem: problem, completion: completion });
 
-            current_step = this.state.step;
             num_steps = this.state.problem.steps.length;
         }
 
@@ -176,7 +176,7 @@ export default class ProblemMobile extends React.Component {
 				<Helmet
 					title="dumbo - Problem"
 				/>
-                <h1 className="ui centered align header">Step {current_step}/{num_steps}</h1>
+                <h1 className="ui centered align header">Step {this.state.step}/{num_steps}</h1>
                 <br/>
                 <SwipeableViews
                     containerStyle={{height: window.innerHeight}}
