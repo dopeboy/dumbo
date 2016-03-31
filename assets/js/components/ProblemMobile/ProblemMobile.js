@@ -145,6 +145,7 @@ export default class ProblemMobile extends React.Component {
 
     onChangeIndex(newIndex, oldIndex) {
         var step = newIndex + 1;
+        alert(123);
         if (this.state.problem != undefined) {
             var exam = this.state.problem.exam.id;
             var problem = this.state.problem.order;
