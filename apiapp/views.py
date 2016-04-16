@@ -34,7 +34,7 @@ def track_event(request):
         return HttpResponse("Must use POST", status=400)
 
     try:
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode("utf-8"))
     except:
         return HttpResponse("Failed to parse json\n" + request.body, status=400)
 
