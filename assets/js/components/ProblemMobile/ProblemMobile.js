@@ -76,15 +76,15 @@ export default class ProblemMobile extends React.Component {
                                     <div className="eight wide column">
                                         <center>
                                             <button
-                                                onClick={this.trackEvent.bind(this, "helpful_step", { step_id: s.id, helpful: true })}
-                                                className="helpful ui basic button">This was helpful</button>
+                                                onClick={this.trackHelpful.bind(this, { step_id: s.id, helpful: true })}
+                                                className="help helpful ui basic button">This was helpful</button>
                                         </center>
                                     </div>
                                     <div className="eight wide column">
                                         <center>
                                             <button
-                                                onClick={this.trackEvent.bind(this, "helpful_step", { step_id: s.id, helpful: false })}
-                                                className="nothelpful ui basic button">This was not helpful</button>
+                                                onClick={this.trackHelpful.bind(this, { step_id: s.id, helpful: true })}
+                                                className="help nothelpful ui basic button">This was not helpful</button>
                                         </center>
                                     </div>
 
@@ -93,6 +93,11 @@ export default class ProblemMobile extends React.Component {
 						</div>
 				  ]
 			}.bind(this)))
+    }
+
+    trackHelpful(data) {
+        this.trackEvent("helpful_step", data);
+        $(".help").addClass("disabled");
     }
 
     trackEvent(event_name, data, e) {
