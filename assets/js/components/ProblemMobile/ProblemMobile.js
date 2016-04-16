@@ -4,6 +4,7 @@ import '!style!css!less!./ProblemMobile.less';
 import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
 import SwipeableViews from 'react-swipeable-views';
+import { track } from '../../event';
 
 export default class ProblemMobile extends React.Component {
 
@@ -31,7 +32,7 @@ export default class ProblemMobile extends React.Component {
 
         // We shouldn't be selecting by class here.
         var visible = $('.step#' + i).not(".hidden").find('.answer-text');
-        $('.step#' + i).find('button').hide();
+        $('.step#' + i).find('button.show').hide();
 
         visible.transition({
             animation : 'fade down',
@@ -62,7 +63,7 @@ export default class ProblemMobile extends React.Component {
 										<div className="qa" dangerouslySetInnerHTML={{__html: s.question}}></div>
 									</div>
                                     <div className="ui center aligned segment" style={{width: "100%", border: "0px", boxShadow: "none", marginTop: "0px"}}>
-                                        <button onClick={this.showAnswerClickHandler.bind(this, i)} className="positive massive ui button">Show</button>
+                                        <button onClick={this.showAnswerClickHandler.bind(this, i)} className="show positive massive ui button">Show</button>
                                     </div>
 									<div className="answer-text two wide column hidden transition">
 										<img src={require("../../../images/patrick.png")} className="bot small ui circular image"/>
@@ -71,11 +72,31 @@ export default class ProblemMobile extends React.Component {
 										<div className="qa" dangerouslySetInnerHTML={{__html: s.answer}}></div>
                                         {swipeNextDiv}
 									</div>
+
+                                    <div className="eight wide column">
+                                        <center>
+                                            <button
+                                                onClick={this.trackEvent.bind(this, "helpful_step", { step_id: s.id, helpful: true })}
+                                                className="helpful ui basic button">This was helpful</button>
+                                        </center>
+                                    </div>
+                                    <div className="eight wide column">
+                                        <center>
+                                            <button
+                                                onClick={this.trackEvent.bind(this, "helpful_step", { step_id: s.id, helpful: false })}
+                                                className="nothelpful ui basic button">This was not helpful</button>
+                                        </center>
+                                    </div>
+
 								</div>
 							</div>
 						</div>
 				  ]
 			}.bind(this)))
+    }
+
+    trackEvent(event_name, data, e) {
+        track(event_name, data);
     }
 
     onChangeIndex(newIndex, oldIndex) {
@@ -86,6 +107,8 @@ export default class ProblemMobile extends React.Component {
             var completion = step/this.state.problem.steps.length;
 
             ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, "completion", completion)
+            var step_id = this.state.problem.steps[step - 1].id;
+            this.trackEvent("view_step", { step_id });
         }
 
 		$('html, body').scrollTop(0);

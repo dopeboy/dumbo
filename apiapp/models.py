@@ -43,3 +43,16 @@ class Step(models.Model):
 
     def __str__(self):
         return str(self.problem) + " - Step " + str(self.order)
+
+class Event(models.Model):
+    id = models.AutoField(primary_key=True)
+    ip = models.CharField(max_length=256)
+    timestamp = models.DateTimeField(auto_now=True)
+    event_type = models.CharField(max_length=256)
+
+    # sparse event data
+    int1 = models.BigIntegerField(default=-1, blank=True)
+    int2 = models.BigIntegerField(default=-1, blank=True)
+
+    string1 = models.CharField(max_length=256, blank=True)
+    string2 = models.CharField(max_length=256, blank=True)
