@@ -27,6 +27,13 @@ DATABASE_URL="postgres://dev_dumbo_user:dev@localhost/dev_dumbo_db"
 export DATABASE_URL
 ```
 
+## Deploying
+Run
+```
+./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js
+```
+and then commit and push.
+
 heroku: https://thawing-earth-1925.herokuapp.com/
 
 ## Guidelines for writing solutions (work in progress)
