@@ -3,12 +3,12 @@ in pkgs.stdenv.mkDerivation {
   name = "dumboEnv";
   src = ./.;
   buildInputs = with pkgs;
-  [ python python27Packages.sqlite3 nodejs sqlite postgresql heroku ];
+  [ python3 python3Packages.sqlite3 nodejs sqlite postgresql heroku ];
   DATABASE_URL="sqlite:///dumbo.db";
   DEBUG="true";
   shellHook = ''
     if [ ! -d venv ]; then
-      virtualenv --python=python2.7 venv
+      pyvenv venv
     fi
     source venv/bin/activate
   '';
