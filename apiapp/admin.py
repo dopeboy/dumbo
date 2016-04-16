@@ -5,3 +5,4 @@ from apiapp import models
 admin.site.register(models.Exam)
 admin.site.register(models.Problem)
 admin.site.register(models.Step)
+admin.site.register(models.Event)
