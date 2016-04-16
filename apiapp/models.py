@@ -44,6 +44,7 @@ class Step(models.Model):
     def __str__(self):
         return str(self.problem) + " - Step " + str(self.order)
 
+
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
     ip = models.CharField(max_length=256)
@@ -56,3 +57,9 @@ class Event(models.Model):
 
     string1 = models.CharField(max_length=256, blank=True)
     string2 = models.CharField(max_length=256, blank=True)
+
+    class Meta:
+        ordering = ['timestamp']
+
+    def __str__(self):
+        return str(self.ip) + " - " + str(self.event_type) + " - " + str(self.int1)
