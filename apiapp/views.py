@@ -36,7 +36,7 @@ def track_event(request):
     try:
         data = json.loads(request.body)
     except:
-        return HttpResponse("Failed to parse json", status=400)
+        return HttpResponse("Failed to parse json\n" + request.body, status=400)
 
     if "event_type" not in data:
         return HttpResponse("Must include event_type", status=400)
