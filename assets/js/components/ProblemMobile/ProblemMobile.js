@@ -137,15 +137,20 @@ export default class ProblemMobile extends React.Component {
 
         return (
             <div id="problem-component">
-				<Helmet
-					title="dumbo - Problem"
-				/>
-                <h1 className="ui centered align header">Step {this.state.step}/{num_steps}</h1>
+				<Helmet title="dumbo - Problem" />
+                <h1 className="ui centered align header"
+                    style={{
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        width: "100%"
+                    }}
+                >Step {this.state.step}/{num_steps}</h1>
                 <br/>
                 <SwipeableViews
-                    containerStyle={{height: window.innerHeight}}
-                    slideStyle={{height: "100%"}}
-                    style={{height: "100%"}}
+                    containerStyle={{minHeight: window.innerHeight}}
+                    slideStyle={{minHeight: "100%"}}
+                    style={{minHeight: "100%", paddingTop: "50px" }}
                     onChangeIndex={this.onChangeIndex.bind(this)}>
                     {this.state.processed_steps}
                 </SwipeableViews>
