@@ -15,7 +15,5 @@ urlpatterns = [
     url(r'^exam', views.NoDataView.as_view()),
     url(r'^problem_desktop', views.NoDataView.as_view()),
     url(r'^problem', views.MobileView.as_view()),
-    url(r'^event', views.track_event),
-
-    url(r'^test', views.MobileView.as_view())
+    url(r'^event', views.track_event)
 ]
