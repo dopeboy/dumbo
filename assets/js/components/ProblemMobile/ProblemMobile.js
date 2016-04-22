@@ -43,6 +43,8 @@ export default class ProblemMobile extends React.Component {
     }
 
     processSteps(steps) {
+        var num_steps = steps.length;
+
 		return (
 			steps.map(function(s, i) {
                   var stepClasses = "ui step two column grid" + (i==0 ? "" : " ");
@@ -52,7 +54,12 @@ export default class ProblemMobile extends React.Component {
                       swipeNextDiv = <div className="qa swipe-next">Swipe left to go to the next step</div>;
                   }
 
-				  return [
+				  return (
+				    <div>
+                        <h1 className="ui centered align header"
+                            style={{
+                                padding: "20px"
+                            }}>Step {i+1}/{num_steps}</h1>
                         <div id={i} className={stepClasses}>
 							<div className="sixteen wide column">
 								<div className="ui two column grid">
@@ -91,7 +98,7 @@ export default class ProblemMobile extends React.Component {
 								</div>
 							</div>
 						</div>
-				  ]
+					</div>);
 			}.bind(this)))
     }
 
@@ -121,16 +128,12 @@ export default class ProblemMobile extends React.Component {
     }
 
     render() {
-        var num_steps = null;
-
         if (this.state.problem != undefined) {
             var exam = this.state.problem.exam.id;
             var problem = this.state.problem.order;
             var completion = this.state.step/this.state.problem.steps.length;
             ga('send', 'event', 'Exam ' + exam, 'Problem ' + problem, "completion", completion)
             console.log({ exam: exam, problem: problem, completion: completion });
-
-            num_steps = this.state.problem.steps.length;
         }
 
 		var formClasses = "ui form" + (this.state.problem !== null ? "" : " loading");
@@ -138,23 +141,13 @@ export default class ProblemMobile extends React.Component {
         return (
             <div id="problem-component">
 				<Helmet title="dumbo - Problem" />
-                <h1 className="ui centered align header"
-                    style={{
-                        position: "absolute",
-                        top: "0",
-                        left: "0",
-                        width: "100%"
-                    }}
-                >Step {this.state.step}/{num_steps}</h1>
-                <br/>
                 <SwipeableViews
-                    containerStyle={{minHeight: window.innerHeight}}
-                    slideStyle={{minHeight: "100%"}}
-                    style={{minHeight: "100%", paddingTop: "50px" }}
+                    containerStyle={{height: window.innerHeight}}
+                    slideStyle={{height: "100%"}}
+                    style={{height: "100%" }}
                     onChangeIndex={this.onChangeIndex.bind(this)}>
                     {this.state.processed_steps}
                 </SwipeableViews>
-                <br/>
             </div>
         );
     }
