@@ -4,6 +4,7 @@ from django.conf import settings
 from rest_framework import viewsets
 from apiapp import models
 from apiapp import serializers
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 
@@ -29,6 +30,7 @@ class ProblemViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Problem.objects.all()
     serializer_class = serializers.ProblemSerializer
 
+@csrf_exempt
 def track_event(request):
     if request.method != "POST":
         return HttpResponse("Must use POST", status=400)
